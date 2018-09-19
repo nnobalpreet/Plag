@@ -1,0 +1,57 @@
+import java.util.*;
+import java.io.*;
+public class TestHashMap
+{
+	public static void main(String[] args)
+	{
+		Hashtable<String, String> hashy = new Hashtable<String, String>();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("FileName");
+		BufferedReader br = null;
+		try
+		{
+			br = new BufferedReader(new FileReader(kb.nextLine()));//reads file
+			System.out.println("File Read");
+			while(br.ready())//read until last line
+			{
+				String line = br.readLine();//assigns the line read by the readerr to line
+				String[] result = line.split("\\s");//tokenizes the line
+				for(int i = 0; i < result.length; i++)
+				{
+					if(!hashy.containsKey(result[i]))
+					{
+						hashy.put(result[i], line);//assigns a key to the line
+					}
+					else
+					{
+						hashy.put(result[i], line+"\n"+hashy.get(result[i]));//if a key was assigned to a value already we will
+																	   //assign the old value to the new value to assosciate with this
+		                                 							   //key and emulate an index
+					}
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.exit(1);
+		}
+		System.out.println(hashy);
+		do
+		{
+			System.out.println("Enter word to search/n");
+			System.out.println(hashy.get(sc.nextLine()));
+			System.out.println("Press no to exit!/n");
+                        System.out.println("Any key to continue/n")
+		}while(!sc.nextLine().equalsIgnoreCase("<NO>"));
+		try
+		{
+			br.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.exit(1);
+		}
+	}
+}
